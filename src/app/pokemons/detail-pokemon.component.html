@@ -1,0 +1,53 @@
+<div *ngIf="pokemon" class="row">
+    <div class="col s12 m8 offset-m2">
+        <h2 class="header center">{{ pokemon.name }}</h2>
+        <div class="card horizontal hoverable">
+            <div class="card-image">
+                <img [src]="pokemon.picture">
+            </div>
+            <div class="card-stacked">
+                <div class="card-content">
+                    <table class="bordered striped">
+                        <tbody>
+                            <tr>
+                                <td style="font-weight: bold;">Nom</td>
+                                <td><strong>{{ pokemon.name }}</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Points de vie</td>
+                                <td><strong>{{ pokemon.hp }}</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Dégâts</td>
+                                <td><strong>{{ pokemon.cp }}</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Types</td>
+                                <td>
+                                    <span *ngFor="let type of pokemon.types"
+                                        class="{{ type | pokemonTypeColor }}">{{ type }}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Évolution</td>
+                                <td>{{ pokemon.evolution }}</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;">Date de création</td>
+                                <td><em>{{ pokemon.created | date:"dd/MM/yyyy" }}</em></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-action">
+                    <a style="margin-right:10px;" class="waves-effect waves-light btn grey darken-3" (click)="goBack()">Retour</a>
+                    <a style="margin-right:10px;" class="waves-effect waves-light btn yellow accent-4 black-text" (click)="goEdit(pokemon)">Editer</a>
+                    <a class="waves-effect waves-light btn red darken-4" (click)="delete(pokemon)">Supprimer</a>  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<h4 *ngIf='!pokemon' class='center'>
+    <pkmn-loader></pkmn-loader>
+</h4>
